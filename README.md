@@ -1,5 +1,5 @@
-AppUI
-===
+# AppUI自动化框架
+
 基于 Appium 的 UI 自动化测试框架。
 
 ## 简介
@@ -15,12 +15,18 @@ AppUI
 7、测试完毕，自动生成简洁美观的 html 报告(目前仅限使用关键字驱动时，才会生成) <br>
 
 ## 环境配置
-详情请查看 doc 文件夹的 START-APPIUM.md
+详情请查看 doc 文件夹的 Start-Appium.md
 
 ## 更新日志
 
-##V1.0
-- 修复Android 6.0或以上设备解锁失败的例子
+### V1.1
+- 修复 ios 真机测试例子
+- pom.xml 增加将依赖库一起打包
+- 去掉 Android 解锁的 API
+- 更新 javadoc
+
+### V1.0
+- ~~修复Android 6.0或以上设备解锁失败的例子~~
 - 更新 javadoc
 
 ### V1.0-beta
@@ -38,3 +44,5 @@ AppUI
 
 ## 实例
 请查看test 源码文件夹中的简单实例
+
+

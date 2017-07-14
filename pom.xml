@@ -4,7 +4,7 @@
 
   <groupId>com.dc</groupId>
   <artifactId>AppUI</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -25,6 +25,7 @@
 					<testTarget>1.8</testTarget>
 				</configuration>
 			</plugin>
+			<!-- 配置安装版本 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -126,7 +127,7 @@
 	<dependency>
   		<groupId>io.appium</groupId>
   		<artifactId>java-client</artifactId>
-  		<version>5.0.0-BETA8</version>
+  		<version>5.0.0-BETA9</version>
 	</dependency>
 	<!-- Java 日志插件-log4j2 -->
   	<dependency>
