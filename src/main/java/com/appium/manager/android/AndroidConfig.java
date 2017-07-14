@@ -257,8 +257,8 @@ public class AndroidConfig implements AppiumConfig {
     }
 
 	/**
-	 * 解锁指定设备</br>
-	 * 很多设备不支持，不推荐使用</br>
+	 * 解锁指定设备。
+	 * 很多设备不支持，不推荐使用
 	 *
 	 * @param deviceID 设备号
 	 */
@@ -275,8 +275,8 @@ public class AndroidConfig implements AppiumConfig {
 	}
 
 	/**
-	 * 锁定指定设备</br>
-	 * 很多设备不支持，不推荐使用</br>
+	 * 锁定指定设备
+	 * 很多设备不支持，不推荐使用
 	 *
 	 * @param deviceID 设备号
 	 */
@@ -323,10 +323,10 @@ public class AndroidConfig implements AppiumConfig {
      * */
     @Override
     public boolean checkAppIsInstalled(String deviceID, String app_package) {
-    	String command = "adb -s " + deviceID + " shell pm list package";
+    	String command = "adb -s " + deviceID + " shell pm list package -3";
     	boolean isInstalled = false;
         try {
-        	
+
 			String packages = cmd.runCommand(command);
 			if (packages.contains(app_package)) {
 				isInstalled = true;
