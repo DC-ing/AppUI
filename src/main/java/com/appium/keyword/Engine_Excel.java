@@ -161,7 +161,7 @@ public class Engine_Excel {
 	}
 	
 	/**
-	 * 指定关键字中的方法
+	 * 指定关键字中的方法，无论测试成功还是失败都会截图
 	 * 
 	 * @param actionKeyWord {@link com.appium.keyword.BaseKeyWord}
 	 * @param rowNum Excel行号
@@ -181,7 +181,19 @@ public class Engine_Excel {
 					logger.info("在 \"" + actionKeyWord.getClass().getName() + "\" 运行 \"" + runMethod + "\" 方法。");
 					//调用指定关键字的方法
 					methods[i].invoke(actionKeyWord);
-					elementTest.get().info(elementName + " 测试通过");
+					//确认好完整的截图名称
+					String screenShotName = ConfigManager.getScreenshotPath()
+							+ pageName + "-" + elementName
+							+ "_" + TestResult.PASS
+							+ "_" + DateTimeUtils.getFileDateTime()
+							+ ".png";
+					actionKeyWord.getLocator().getScreenShot(screenShotName);
+					try {
+						elementTest.get().info(elementName + " 测试通过", MediaEntityBuilder.createScreenCaptureFromPath(screenShotName).build());
+					} catch (IOException e1) {
+						logger.error("填写测试结果失败\n", e1);
+					}
+
 					//填写测试结果
 					ExcelUtils.setCellData(actionKeyWord.getCaseSheet(), rowNum, CasesParameters.test_result_cell_num, TestResult.PASS);
 				} catch (Exception e) {
@@ -202,7 +214,6 @@ public class Engine_Excel {
 						logger.error("填写测试结果失败\n", e);
 					}
 					ExcelUtils.setCellData(actionKeyWord.getCaseSheet(), rowNum, CasesParameters.test_result_cell_num, TestResult.FAIL);
-					
 				}
 				break;
 			} /*else {
