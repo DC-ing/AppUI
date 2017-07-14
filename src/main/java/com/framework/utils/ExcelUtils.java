@@ -349,20 +349,21 @@ public class ExcelUtils {
 	}
 	
 	/**
-	 * 读取 ios 测试设备号、测试应用包名、启动页面等信息
-	 *
+	 * 读取 ios 测试设备号、测试应用包名等信息.
+	 * PS:ios 无启动页面选项
 	 * @param rowNum 行号，从1开始
 	 *
 	 * @return 设备测试配置数据
 	 */
 	public Map<String, String> getIOSDeviceTestConfig(int rowNum) {
-		int lastCellNum = 4;
+		int lastCellNum = 5;
 		String[] deviceData = readTestDatas("配置", rowNum, lastCellNum);
 		Map<String, String> map = new HashMap<>();
 		map.put("id", deviceData[0]);
 		map.put(MobileCapabilityType.UDID, deviceData[1]);
 		map.put(IOSMobileCapabilityType.BUNDLE_ID, deviceData[2]);
 		map.put(MobileCapabilityType.APP, deviceData[3]);
+		map.put(IOSMobileCapabilityType.XCODE_ORG_ID, deviceData[4]);
 		return map;
 	}
 

@@ -151,6 +151,8 @@ public class GetLocator {
 		if (ios.checkAppIsInstalled(udid, deviceConfig.get(IOSMobileCapabilityType.BUNDLE_ID))) {
 			//需要重新安装应用
 			//capabilities.setCapability(MobileCapabilityType.FULL_RESET, Boolean.TRUE);
+			//不需要重新安装应用
+			capabilities.setCapability(MobileCapabilityType.NO_RESET, Boolean.TRUE);
 		} else {
 			//不需要重新安装
 			capabilities.setCapability(MobileCapabilityType.NO_RESET, Boolean.TRUE);
@@ -159,7 +161,7 @@ public class GetLocator {
 		capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ios.getAutomatorName(udid));
 		//如果测试引擎为XCUI，就需要设置以下参数
 		if (AutomationName.IOS_XCUI_TEST.equalsIgnoreCase(ios.getAutomatorName(udid))) {
-			capabilities.setCapability(IOSMobileCapabilityType.XCODE_CONFIG_FILE, config.getProperty(ConfigManager.XCODE_SETTING_PATH));
+			capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, deviceConfig.get(IOSMobileCapabilityType.XCODE_ORG_ID));
 			capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
 		}
 		//appium 命令启动超时时间
