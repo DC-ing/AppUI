@@ -169,7 +169,21 @@ public class IOSLocator<T extends MobileElement> extends AppLocator<T> {
 	public void swipe(int startX, int startY, int endX, int endY, int duration) {
 		super.swipe(startX, startY, endX - startX, endY - startY, duration);
 	}
-	
+
+	/**
+	 * iOS 的 Swipe 方法与安卓不一致，需覆盖方法
+	 *
+	 * @param startX 滑动开始 X 坐标
+	 * @param startY 滑动开始 Y 坐标
+	 * @param endX 滑动结束 X 坐标
+	 * @param endY 滑动结束 Y 坐标
+	 *
+	 */
+	@Override
+	public void swipe(int startX, int startY, int endX, int endY) {
+		super.swipe(startX, startY, endX - startX, endY - startY);
+	}
+
 	/**
 	 * 摇动设备，只针对 iOS 设备
 	 * 

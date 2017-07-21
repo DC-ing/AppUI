@@ -356,8 +356,8 @@ public class MyElement {
 			int centerY = this.getCenter().y;
 			AppiumDriver<? extends MobileElement> driver = locator.getDriver();
 			MultiTouchAction multiTouch = new MultiTouchAction(driver);
-			multiTouch.add(new TouchAction(driver).press(centerX, centerY).waitAction(300).moveTo(getLocation().x + getSize().getWidth() - 5, getLocation().y + 5).release());
-			multiTouch.add(new TouchAction(driver).press(centerX, centerY).waitAction(300).moveTo(getLocation().x + 5, getLocation().y + getSize().height - 5).release());
+			multiTouch.add(new TouchAction(driver).press(centerX, centerY).waitAction(Duration.ofMillis(300)).moveTo(getLocation().x + getSize().getWidth() - 5, getLocation().y + 5).release());
+			multiTouch.add(new TouchAction(driver).press(centerX, centerY).waitAction(Duration.ofMillis(300)).moveTo(getLocation().x + 5, getLocation().y + getSize().height - 5).release());
 			multiTouch.perform();
 
 			logger.info(this.toString() + " 放大");
@@ -378,8 +378,8 @@ public class MyElement {
 			int centerY = this.getCenter().y;
 			AppiumDriver<? extends MobileElement> driver = locator.getDriver();
 			MultiTouchAction multiTouch = new MultiTouchAction(driver);
-			multiTouch.add(new TouchAction(driver).press(getLocation().x + getSize().getWidth() - 5, getLocation().y + 5).waitAction(300).moveTo(centerX, centerY).release());
-			multiTouch.add(new TouchAction(driver).press(getLocation().x + 5, getLocation().y + getSize().height - 5).waitAction(300).moveTo(centerX, centerY).release());
+			multiTouch.add(new TouchAction(driver).press(getLocation().x + getSize().getWidth() - 5, getLocation().y + 5).waitAction(Duration.ofMillis(300)).moveTo(centerX, centerY).release());
+			multiTouch.add(new TouchAction(driver).press(getLocation().x + 5, getLocation().y + getSize().height - 5).waitAction(Duration.ofMillis(300)).moveTo(centerX, centerY).release());
 			multiTouch.perform();
 
 			logger.info(this.toString() + " 缩小");
@@ -407,18 +407,26 @@ public class MyElement {
 		return new Swipe();
 	}
 
-	public void swipe(SwipeElementDirection direction, int offset1, int offset2, int duration) {
-		direction.swipe(locator, this, offset1, offset2, duration);
-	}
-
 	/**
 	 * 内部类，用于测试 app 时，元素四个方向的滑动
 	 * 适用：Android
 	 *
-	 * @version 1.1
+	 * @version 2.0
 	 *
 	 */
 	class Swipe implements SwipeElement {
+
+		private final int REMAIN_LOCATION = 5;
+
+		private Point location;
+		private Point center;
+		private Dimension size;
+
+		public Swipe() {
+			location = getLocation();
+			center = getCenter();
+			size = getSize();
+		}
 
 		/**
 		 * 元素向左滑动
@@ -426,7 +434,11 @@ public class MyElement {
 		 */
 		public void swipeElementLeft() {
 			try {
-				swipe(SwipeElementDirection.LEFT, 3, 3, Locator.DEFAULT_SWIPE_MILLSECONDS);
+				int startX = location.getX() + size.getWidth() - REMAIN_LOCATION;
+				int startY = center.getY();
+				int endX = location.getX() + REMAIN_LOCATION;
+				int endY = startY;
+				locator.swipe(startX, startY, endX, endY);
 				logger.info(this.toString() + " 滑动到左边");
 			} catch (WebDriverException e) {
 				Engine_Excel.bResult = false;
@@ -440,7 +452,11 @@ public class MyElement {
 		 */
 		public void swipeElementRight() {
 			try {
-				swipe(SwipeElementDirection.RIGHT, 3, 3, Locator.DEFAULT_SWIPE_MILLSECONDS);
+				int startX = location.getX() + REMAIN_LOCATION;
+				int startY = center.getY();
+				int endX = location.getX() + size.getWidth() - REMAIN_LOCATION;
+				int endY = startY;
+				locator.swipe(startX, startY, endX, endY);
 				logger.info(this.toString() + " 滑动到右边");
 			} catch (WebDriverException e) {
 				Engine_Excel.bResult = false;
@@ -454,7 +470,11 @@ public class MyElement {
 		 */
 		public void swipeElementUp() {
 			try {
-				swipe(SwipeElementDirection.UP, 3, 3, Locator.DEFAULT_SWIPE_MILLSECONDS);
+				int startX = center.getX();
+				int startY = location.getY() + size.getHeight() - REMAIN_LOCATION;
+				int endX = startX;
+				int endY = location.getY() + REMAIN_LOCATION;
+				locator.swipe(startX, startY, endX, endY);
 				logger.info(this.toString() + " 滑动到上方");
 			} catch (WebDriverException e) {
 				Engine_Excel.bResult = false;
@@ -468,7 +488,11 @@ public class MyElement {
 		 */
 		public void swipeElementDown() {
 			try {
-				swipe(SwipeElementDirection.DOWN, 3, 3, Locator.DEFAULT_SWIPE_MILLSECONDS);
+				int startX = center.getX();
+				int startY = location.getY() + REMAIN_LOCATION;
+				int endX = startX;
+				int endY = location.getY() + size.getHeight() - REMAIN_LOCATION;
+				locator.swipe(startX, startY, endX, endY);
 				logger.info(this.toString() + "  滑动到下面");
 			} catch (WebDriverException e) {
 				Engine_Excel.bResult = false;

@@ -21,7 +21,7 @@ public interface Locator<T extends MobileElement> {
 	int DEFAULT_ELEMENT_WAIT_SECONDS = 15;			//元素默认等待时间，单位：s
 	int DEFAULT_LONG_TAP_MILLSECONDS = 3000;		//长按默认时间，单位：ms
 	int DEFAULT_SHORT_TAP_MILLSECONDS = 200;		//短按默认时间，单位：ms
-	int DEFAULT_SWIPE_MILLSECONDS = 300;			//滑动操作默认时间，单位：ms
+	int DEFAULT_SWIPE_MILLSECONDS = 500;			//滑动操作默认时间，单位：ms
 	int DEFAULT_TAP_FINGERS = 1;					//点击时，默认手指数
 	
 	String NATIVE_APP = "NATIVE_APP";				//context处于客户端状态
