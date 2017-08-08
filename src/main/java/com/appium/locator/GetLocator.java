@@ -63,8 +63,8 @@ public class GetLocator {
 		//Android版本号
 		capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, android.getDeviceOSVersion(deviceID));
 		//支持中文输入
-		capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, Boolean.TRUE);
-		capabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, Boolean.TRUE);
+		capabilities.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
+		capabilities.setCapability(AndroidMobileCapabilityType.RESET_KEYBOARD, true);
 		//设置app的主包名和主类名
 		String app_package = deviceConfig.get(AndroidMobileCapabilityType.APP_PACKAGE);
 		capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, app_package);
@@ -77,7 +77,7 @@ public class GetLocator {
 			//使用 adb 命令解锁手机，跳过 Appium
 			android.unlockDevice(deviceID);
 			//跳过解锁的进程
-			capabilities.setCapability("skipUnlock", Boolean.TRUE);
+			capabilities.setCapability("skipUnlock", true);
 		}
 		//设置命令启动超时时间
 		capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, Integer.parseInt(config.getProperty(ConfigManager.COMMAND_TIME_OUT)));
@@ -91,7 +91,9 @@ public class GetLocator {
 		} else {
 			android.installApp(deviceID, app_package);
 		}
-		capabilities.setCapability(MobileCapabilityType.NO_RESET, Boolean.TRUE);
+		capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
+		//自动设置权限
+		capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
 
 		logger.info("the capability: " + capabilities.toString());
 
@@ -150,18 +152,19 @@ public class GetLocator {
 		//确认是否需要重新安装被测应用
 		if (ios.checkAppIsInstalled(udid, deviceConfig.get(IOSMobileCapabilityType.BUNDLE_ID))) {
 			//需要重新安装应用
-			//capabilities.setCapability(MobileCapabilityType.FULL_RESET, Boolean.TRUE);
+			//capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
 			//不需要重新安装应用
-			capabilities.setCapability(MobileCapabilityType.NO_RESET, Boolean.TRUE);
+			capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
 		} else {
 			//不需要重新安装
-			capabilities.setCapability(MobileCapabilityType.NO_RESET, Boolean.TRUE);
+			capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
 		}
 		//iOS 的自动化测试引擎
 		capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ios.getAutomatorName(udid));
 		//如果测试引擎为XCUI，就需要设置以下参数
 		if (AutomationName.IOS_XCUI_TEST.equalsIgnoreCase(ios.getAutomatorName(udid))) {
 			capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, deviceConfig.get(IOSMobileCapabilityType.XCODE_ORG_ID));
+			capabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
 			capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
 		}
 		//appium 命令启动超时时间
@@ -216,11 +219,11 @@ public class GetLocator {
 		capabilities.setCapability(MobileCapabilityType.LANGUAGE, "zh-CN");
 		capabilities.setCapability(MobileCapabilityType.UDID, "");
 		//每次运行需重新安装应用
-		capabilities.setCapability(MobileCapabilityType.FULL_RESET, Boolean.TRUE);
+		capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
 		//iOS 的自动化测试引擎
 		capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
 		//如果测试引擎为XCUI，就需要设置以下参数
-		capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, Boolean.TRUE);
+		capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
 		//appium 命令启动超时时间
 		capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, Integer.parseInt(config.getProperty(ConfigManager.COMMAND_TIME_OUT)));
 
