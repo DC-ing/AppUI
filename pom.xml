@@ -71,11 +71,6 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
-					<archive>
-						<manifest>
-							<mainClass></mainClass>
-						</manifest>
-					</archive>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
@@ -120,14 +115,14 @@
   	<dependency>
   		<groupId>org.testng</groupId>
   		<artifactId>testng</artifactId>
-  		<version>6.11</version>
+  		<version>6.13.1</version>
   		<scope>test</scope>
 	</dependency>
 	<!-- Appium自动化框架 Java-client -->
 	<dependency>
   		<groupId>io.appium</groupId>
   		<artifactId>java-client</artifactId>
-  		<version>5.0.3</version>
+  		<version>5.0.4</version>
 	</dependency>
 	<!-- Java 日志插件-log4j2 -->
   	<dependency>
