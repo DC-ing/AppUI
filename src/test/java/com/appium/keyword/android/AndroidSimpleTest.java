@@ -2,7 +2,7 @@ package com.appium.keyword.android;
 
 import com.appium.keyword.Engine_Excel;
 import com.appium.locator.AndroidLocator;
-import com.appium.locator.GetLocator;
+import com.appium.locator.InitLocator;
 import com.framework.utils.ConfigManager;
 import com.framework.utils.ExcelUtils;
 import io.appium.java_client.MobileElement;
@@ -25,7 +25,7 @@ public class AndroidSimpleTest {
 		String androidExcelTestPath = ConfigManager.getAndroidExcelName();
 		excelUtils = new ExcelUtils(androidExcelTestPath);
 		engine = new Engine_Excel(androidExcelTestPath);
-		locator = new GetLocator().getAndroidLocator(excelUtils.getAndroidDeviceTestConfig(deviceNum));
+		locator = new InitLocator().getAndroidLocator(excelUtils.getAndroidDeviceTestConfig(deviceNum));
 	}
 
 	@Test

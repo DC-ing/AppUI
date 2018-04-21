@@ -44,7 +44,7 @@ AppUI-x.x.x-jar-with-dependencies.jar
     ```
     import com.appium.keyword.Engine_Excel;
     import com.appium.locator.AndroidLocator;
-    import com.appium.locator.GetLocator;
+    import com.appium.locator.InitLocator;
     import com.framework.utils.ExcelUtils;
     
     import io.appium.java_client.MobileElement;

@@ -30,14 +30,14 @@ import java.util.Map;
  * 
  */
 
-public class GetLocator {
+public class InitLocator {
 
-	private Logger logger = LogManager.getLogger(GetLocator.class);
+	private Logger logger = LogManager.getLogger(InitLocator.class);
 	private AppiumManager appiumManager;
 	private ConfigManager config;
 	private AppiumDriverLocalService appiumDriverLocalService;
 
-	public GetLocator() throws IOException {
+	public InitLocator() throws IOException {
 		config = ConfigManager.getInstance();
 		appiumManager = new AppiumManager();
 	}

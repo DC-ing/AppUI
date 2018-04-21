@@ -2,7 +2,7 @@ package com.appium.keyword.ios;
 
 import com.appium.keyword.Engine_Excel;
 import com.appium.locator.AppLocator;
-import com.appium.locator.GetLocator;
+import com.appium.locator.InitLocator;
 import com.framework.utils.ConfigManager;
 import com.framework.utils.ExcelUtils;
 import io.appium.java_client.MobileElement;
@@ -22,7 +22,7 @@ public class IOSKeyWordTest {
 	public void beforeSuite() throws IOException, InterruptedException {
 		String iOSExcelTestPath = ConfigManager.getIOSExcelName();
 		excelUtils = new ExcelUtils(iOSExcelTestPath);
-		locator = new GetLocator().getIOSLocator(excelUtils.getIOSDeviceTestConfig(1));
+		locator = new InitLocator().getIOSLocator(excelUtils.getIOSDeviceTestConfig(1));
 		keywordTest = new Engine_Excel(iOSExcelTestPath);
 	}
 
